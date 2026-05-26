@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Speaking Workbook — @aurora.logs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal: #2A9D8F;
+    --teal-light: #E8F6F4;
+    --teal-mid: #A8DAD5;
+    --orange: #E76F51;
+    --dark: #1A1A2E;
+    --gray: #6B7280;
+    --light: #F8F8F5;
+    --white: #FFFFFF;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--light);
+    color: var(--dark);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 40px;
+    background: rgba(248,248,245,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(42,157,143,0.12);
+  }
+  .nav-brand {
+    font-family: var(--serif);
+    font-size: 17px;
+    color: var(--dark);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+  .nav-cta {
+    background: var(--teal);
+    color: var(--white);
+    padding: 9px 22px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .nav-cta:hover { background: #238a7d; transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(42,157,143,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: var(--teal-light);
+    color: var(--teal);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 32px;
+    border: 1px solid var(--teal-mid);
+    opacity: 0; animation: fadeUp 0.6s 0.1s forwards;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(48px, 8vw, 88px);
+    line-height: 1.05;
+    color: var(--dark);
+    margin-bottom: 24px;
+    max-width: 820px;
+    opacity: 0; animation: fadeUp 0.7s 0.2s forwards;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--teal);
+  }
+  .hero-sub {
+    font-size: 17px;
+    color: var(--gray);
+    max-width: 480px;
+    margin-bottom: 48px;
+    font-weight: 300;
+    opacity: 0; animation: fadeUp 0.7s 0.35s forwards;
+  }
+  .hero-actions {
+    display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+    opacity: 0; animation: fadeUp 0.7s 0.5s forwards;
+  }
+  .btn-primary {
+    background: var(--teal);
+    color: var(--white);
+    padding: 15px 36px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(42,157,143,0.25);
+  }
+  .btn-primary:hover { background: #238a7d; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(42,157,143,0.35); }
+  .btn-secondary {
+    color: var(--gray);
+    padding: 15px 28px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-size: 15px;
+    border: 1px solid rgba(0,0,0,0.12);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--teal); color: var(--teal); }
+
+  .hero-stats {
+    display: flex; gap: 48px; margin-top: 80px; flex-wrap: wrap; justify-content: center;
+    opacity: 0; animation: fadeUp 0.7s 0.65s forwards;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 36px;
+    color: var(--teal);
+    line-height: 1;
+    display: block;
+  }
+  .stat-label {
+    font-size: 13px;
+    color: var(--gray);
+    margin-top: 4px;
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 100px 24px; }
+  .container { max-width: 760px; margin: 0 auto; }
+  .container-wide { max-width: 1000px; margin: 0 auto; }
+
+  /* ── STORY ── */
+  .story { background: var(--white); }
+  .story-text {
+    font-size: 18px;
+    line-height: 1.9;
+    color: var(--dark);
+    font-weight: 300;
+  }
+  .story-text p { margin-bottom: 24px; }
+  .story-text p:last-child { margin-bottom: 0; }
+  .story-text strong { font-weight: 500; color: var(--dark); }
+  .story-text .highlight {
+    background: var(--teal-light);
+    border-left: 3px solid var(--teal);
+    padding: 20px 24px;
+    margin: 32px 0;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: var(--dark);
+  }
+  .ellipsis { color: var(--teal-mid); letter-spacing: 0.2em; display: block; margin: 24px 0; }
+
+  /* ── WHAT'S INSIDE ── */
+  .inside { background: var(--light); }
+  .section-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(32px, 5vw, 48px);
+    color: var(--dark);
+    line-height: 1.15;
+    margin-bottom: 56px;
+  }
+  .section-title em { font-style: italic; color: var(--teal); }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .feature-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 32px;
+    border: 1px solid rgba(42,157,143,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(42,157,143,0.1); }
+  .feature-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .feature-title {
+    font-weight: 600;
+    font-size: 17px;
+    margin-bottom: 10px;
+    color: var(--dark);
+  }
+  .feature-desc {
+    font-size: 15px;
+    color: var(--gray);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ── FOR WHO ── */
+  .for-who { background: var(--white); }
+  .check-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+  .check-list li {
+    display: flex; gap: 14px; align-items: flex-start;
+    font-size: 17px; font-weight: 300; color: var(--dark);
+    padding: 16px 20px;
+    background: var(--light);
+    border-radius: 10px;
+    border-left: 3px solid var(--teal);
+  }
+  .check-list li::before {
+    content: '✓';
+    color: var(--teal);
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── OUTCOMES ── */
+  .outcomes { background: var(--teal); position: relative; overflow: hidden; }
+  .outcomes::before {
+    content: '';
+    position: absolute; top: -50%; right: -10%;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+    pointer-events: none;
+  }
+  .outcomes .section-label { color: rgba(255,255,255,0.6); }
+  .outcomes .section-title { color: var(--white); }
+  .outcomes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .outcome-item {
+    background: rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .outcome-icon { font-size: 22px; margin-bottom: 12px; display: block; }
+  .outcome-text {
+    font-size: 16px;
+    color: rgba(255,255,255,0.9);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+
+  /* ── PRICING ── */
+  .pricing { background: var(--light); }
+  .pricing-card {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 56px;
+    border: 2px solid var(--teal-mid);
+    max-width: 540px;
+    margin: 0 auto;
+    text-align: center;
+    box-shadow: 0 24px 80px rgba(42,157,143,0.12);
+    position: relative;
+    overflow: hidden;
+  }
+  .pricing-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--teal), var(--teal-mid));
+  }
+  .pricing-name {
+    font-family: var(--serif);
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+  .pricing-tagline {
+    font-size: 15px;
+    color: var(--gray);
+    font-weight: 300;
+    margin-bottom: 40px;
+  }
+  .pricing-includes {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .pricing-includes li {
+    display: flex; gap: 12px; align-items: center;
+    font-size: 15px; color: var(--dark); font-weight: 300;
+  }
+  .pricing-includes li::before {
+    content: '✦';
+    color: var(--teal);
+    font-size: 11px;
+    flex-shrink: 0;
+  }
+  .pricing-price {
+    font-family: var(--serif);
+    font-size: 64px;
+    color: var(--teal);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .pricing-compare {
+    font-size: 14px;
+    color: var(--gray);
+    margin-bottom: 32px;
+    font-weight: 300;
+  }
+  .btn-buy {
+    display: block;
+    background: var(--teal);
+    color: var(--white);
+    padding: 18px 40px;
+    border-radius: 100px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 24px rgba(42,157,143,0.3);
+    margin-bottom: 16px;
+  }
+  .btn-buy:hover { background: #238a7d; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(42,157,143,0.4); }
+  .pricing-note {
+    font-size: 13px;
+    color: var(--gray);
+    font-weight: 300;
+  }
+
+  /* ── ABOUT ── */
+  .about { background: var(--white); }
+  .about-inner {
+    display: flex; gap: 56px; align-items: center; flex-wrap: wrap;
+  }
+  .about-text { flex: 1; min-width: 280px; }
+  .about-name {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-style: italic;
+    margin-bottom: 16px;
+    color: var(--teal);
+  }
+  .about-bio {
+    font-size: 16px;
+    color: var(--dark);
+    font-weight: 300;
+    line-height: 1.8;
+  }
+  .about-bio p { margin-bottom: 16px; }
+
+  /* ── FINAL CTA ── */
+  .final-cta {
+    background: var(--dark);
+    text-align: center;
+    padding: 120px 24px;
+  }
+  .final-cta .section-label { color: rgba(255,255,255,0.4); }
+  .final-cta h2 {
+    font-family: var(--serif);
+    font-size: clamp(36px, 5vw, 56px);
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 24px;
+  }
+  .final-cta h2 em { font-style: italic; color: var(--teal-mid); }
+  .final-cta p {
+    font-size: 17px;
+    color: rgba(255,255,255,0.55);
+    font-weight: 300;
+    max-width: 440px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    text-align: center;
+    padding: 28px 24px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.3);
+  }
+  footer a { color: rgba(255,255,255,0.4); text-decoration: none; }
+  footer a:hover { color: var(--teal-mid); }
+
+  /* ── DIVIDER ── */
+  .divider {
+    text-align: center;
+    color: var(--teal-mid);
+    letter-spacing: 0.3em;
+    font-size: 13px;
+    padding: 40px 0 0;
+    opacity: 0.5;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 640px) {
+    nav { padding: 14px 20px; }
+    .hero { padding: 100px 20px 60px; }
+    .hero-stats { gap: 32px; }
+    section { padding: 72px 20px; }
+    .pricing-card { padding: 36px 24px; }
+    .about-inner { flex-direction: column; gap: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">aurora.logs</a>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSdGPC7UvNvoQZX3MpXe7CC2mny1DFhMpqIXDW3ET4pSJG4aXg/viewform?usp=header" class="nav-cta" target="_blank">Mua ngay →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="hero-tag">Daily Speaking Workbook</span>
+  <h1>Học để <em>nói được.</em><br>Không phải để biết.</h1>
+  <p class="hero-sub">50 chủ đề đời thường. 150 mẫu câu thực tế. 1500 câu luyện dịch. Kèm audio.</p>
+  <div class="hero-actions">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdGPC7UvNvoQZX3MpXe7CC2mny1DFhMpqIXDW3ET4pSJG4aXg/viewform?usp=header" class="btn-primary" target="_blank">Lấy workbook ngay →</a>
+    <a href="#inside" class="btn-secondary">Xem bên trong</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">50</span><span class="stat-label">chủ đề đời thường</span></div>
+    <div class="stat"><span class="stat-num">150</span><span class="stat-label">mẫu câu thực tế</span></div>
+    <div class="stat"><span class="stat-num">1500</span><span class="stat-label">câu luyện dịch</span></div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story">
+  <div class="container">
+    <div class="story-text reveal">
+      <p>mình luôn tin là: ngôn ngữ là thứ có thể tự học được.</p>
+      <p>mình đã làm được. và mình cũng thấy rất nhiều người xung quanh mình làm được. không phải vì họ giỏi hơn. mà vì họ tìm được cách học phù hợp với mình.</p>
+      <span class="ellipsis">· · ·</span>
+      <p>mình là người hướng nội.</p>
+      <p>nên mình hiểu cảm giác muốn nói tiếng Anh — nhưng không biết bắt đầu từ đâu. ngoài kia quá nhiều thứ: app này, khóa học kia, phương pháp nọ. xem xong thấy choáng, rồi thôi.</p>
+      <p>nhiều lúc không phải là không học được. mà là không có thứ gì đủ rõ ràng để bắt đầu.</p>
+      <span class="ellipsis">· · ·</span>
+      <p>nên mình tạo ra Daily Speaking Workbook.</p>
+      <div class="highlight">đủ đơn giản để bạn có thể bắt đầu ngay hôm nay. đủ đều để bạn duy trì mỗi ngày. không áp lực. không cần nói trước ai. chỉ là mỗi ngày một unit — dịch ra, đọc to theo audio, rồi quen dần.</div>
+      <p>mình không nghĩ đây là cách duy nhất để học tiếng Anh. nhưng nếu bạn giống mình — cần một thứ cụ thể để làm, không phải một thứ để đọc rồi để đó — thì có thể bạn sẽ hợp với nó.</p>
+    </div>
+  </div>
+</section>
+
+<!-- INSIDE -->
+<section class="inside" id="inside">
+  <div class="container-wide">
+    <div class="reveal">
+      <p class="section-label">Bên trong có gì</p>
+      <h2 class="section-title">Mọi thứ bạn cần.<br><em>Không gì thừa.</em></h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <span class="feature-icon">📘</span>
+        <div class="feature-title">150 mẫu câu thực tế</div>
+        <div class="feature-desc">Được chọn lọc từ những câu bạn thực sự dùng trong cuộc sống hàng ngày — không phải kiểu học-chỉ-để-học. Mỗi mẫu câu có giải thích cách dùng và ví dụ cụ thể.</div>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">✍️</span>
+        <div class="feature-title">1500 câu luyện dịch Việt → Anh</div>
+        <div class="feature-desc">Nhìn câu tiếng Việt → tự dịch → so lại đáp án. Sau 50 units bạn có 150 mẫu câu đã đi qua tay — não nhớ theo cách đó, không cần cố nhớ.</div>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">🎧</span>
+        <div class="feature-title">Audio + Shadowing</div>
+        <div class="feature-desc">Mỗi unit có audio và đoạn văn mẫu để đọc to theo 2–3 lần. Không cần giọng chuẩn. Chỉ cần mở miệng ra — workbook này buộc bạn làm điều đó mỗi ngày.</div>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">💬</span>
+        <div class="feature-title">Personal Response</div>
+        <div class="feature-desc">Viết câu trả lời về chính bạn — không phải về nhân vật trong sách. Đây là lúc tiếng Anh bắt đầu trở thành của bạn thật sự.</div>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">💡</span>
+        <div class="feature-title">Quick Tips ngữ pháp thực chiến</div>
+        <div class="feature-desc">Mỗi unit có 2 tips về những lỗi người Việt hay mắc nhất — ngắn, cụ thể, có ví dụ. Không phải lý thuyết. Là những thứ bạn dùng được ngay.</div>
+      </div>
+      <div class="feature-card reveal">
+        <span class="feature-icon">📖</span>
+        <div class="feature-title">Phụ lục từ vựng + Đáp án</div>
+        <div class="feature-desc">96 từ vựng thực dụng theo 8 chủ đề. Đáp án đầy đủ cho toàn bộ 1500 câu luyện dịch — để bạn tự kiểm tra và sửa lại.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHO -->
+<section class="for-who">
+  <div class="container">
+    <div class="reveal">
+      <p class="section-label">Dành cho ai</p>
+      <h2 class="section-title">Bạn đang ở <em>đúng chỗ</em> nếu…</h2>
+    </div>
+    <ul class="check-list reveal">
+      <li>Bạn hiểu tiếng Anh cơ bản nhưng mở miệng ra không biết bắt đầu từ đâu</li>
+      <li>Bạn học lâu rồi nhưng vẫn chưa nói được</li>
+      <li>Ngoài kia quá nhiều thứ — bạn cần một thứ đủ rõ ràng để bắt đầu, không phải nghĩ nhiều</li>
+      <li>Bạn chấp nhận làm đều mỗi ngày — không cần nhiều, chỉ cần đều</li>
+    </ul>
+  </div>
+</section>
+
+<!-- OUTCOMES -->
+<section class="outcomes">
+  <div class="container-wide">
+    <div class="reveal">
+      <p class="section-label">Sau 50 units</p>
+      <h2 class="section-title">Bạn sẽ có gì.</h2>
+    </div>
+    <div class="outcomes-grid">
+      <div class="outcome-item reveal">
+        <span class="outcome-icon">📌</span>
+        <p class="outcome-text">150 mẫu câu đã luyện qua tay — lấy ra dùng được ngay, không cần dừng lại dịch trong đầu.</p>
+      </div>
+      <div class="outcome-item reveal">
+        <span class="outcome-icon">📌</span>
+        <p class="outcome-text">Thói quen mở miệng nói tiếng Anh mỗi ngày — thứ mà hầu hết người học chưa bao giờ xây được.</p>
+      </div>
+      <div class="outcome-item reveal">
+        <span class="outcome-icon">📌</span>
+        <p class="outcome-text">Hiểu cách dùng câu thay vì học vẹt — nhờ tips ngữ pháp thực chiến trong từng unit.</p>
+      </div>
+      <div class="outcome-item reveal">
+        <span class="outcome-icon">📌</span>
+        <p class="outcome-text">Nền tảng đủ để học tiếp bất kỳ thứ gì — speaking, IELTS, hay chỉ đơn giản là tự tin hơn.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="reveal" style="text-align:center; margin-bottom: 56px;">
+      <p class="section-label" style="text-align:center;">Đầu tư</p>
+      <h2 class="section-title" style="text-align:center; margin-bottom: 0;">Một lần. <em>Dùng mãi.</em></h2>
+    </div>
+    <div class="pricing-card reveal">
+      <div class="pricing-name">Daily Speaking Workbook</div>
+      <div class="pricing-tagline">PDF + Audio · Nhận link ngay sau khi mua</div>
+      <ul class="pricing-includes">
+        <li>50 units × 3 mẫu câu thực tế</li>
+        <li>1500 câu luyện dịch Việt → Anh + đáp án</li>
+        <li>Audio shadowing cho toàn bộ 50 units</li>
+        <li>Quick Tips ngữ pháp thực chiến × 100</li>
+        <li>Phụ lục từ vựng 96 từ theo chủ đề</li>
+        <li>Hướng dẫn sử dụng + lịch học 12 tuần</li>
+      </ul>
+      <div class="pricing-price">149k</div>
+      <div class="pricing-compare">Bằng 1 tháng app học tiếng Anh bạn mở được 3 lần rồi bỏ.</div>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdGPC7UvNvoQZX3MpXe7CC2mny1DFhMpqIXDW3ET4pSJG4aXg/viewform?usp=header" class="btn-buy" target="_blank">Mua Daily Speaking Workbook →</a>
+      <p class="pricing-note">Nhận file qua email sau khi điền form.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+  <div class="container">
+    <div class="about-inner reveal">
+      <div class="about-text">
+        <div class="about-name">Aurora</div>
+        <div class="about-bio">
+          <p>Mình tạo ra những tài liệu học tiếng Anh mà mình ước mình có khi còn mới bắt đầu — thực tế, không rườm rà, và đủ đơn giản để duy trì mỗi ngày.</p>
+          <p>Daily Speaking Workbook là sản phẩm mình tâm huyết nhất cho đến giờ.</p>
+        </div>
+        <a href="https://www.instagram.com/aurora.logs" target="_blank" style="color: var(--teal); font-size: 14px; text-decoration: none; font-weight: 500;">@aurora.logs trên Instagram →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="container">
+    <p class="section-label">Sẵn sàng chưa</p>
+    <h2>Thôi bắt đầu <em>thôi.</em></h2>
+    <p>Nếu bạn vẫn đang "biết mà không nói được" hay "học mà không biết bắt đầu từ đâu" — thì workbook này dành cho bạn.</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdGPC7UvNvoQZX3MpXe7CC2mny1DFhMpqIXDW3ET4pSJG4aXg/viewform?usp=header" class="btn-primary" target="_blank" style="display:inline-block;">Lấy workbook ngay — 149k →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 aurora.logs · <a href="https://www.instagram.com/aurora.logs" target="_blank">Instagram</a></p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.classList.add('visible');
+        observer.unobserve(el.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
