@@ -57,9 +57,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 
 /* BOOK COVER (real image) */
 .book-wrap{margin-top:56px;opacity:0;animation:up 0.8s 0.65s forwards;position:relative;z-index:1}
-.book-real{width:210px;border-radius:6px;overflow:hidden;box-shadow:0 30px 60px rgba(27,42,74,0.28),0 6px 16px rgba(27,42,74,0.15);transform:rotate(-3deg);transition:transform 0.3s}
-.book-real img{display:block;width:100%;height:auto}
-.book-real:hover{transform:rotate(-1deg) translateY(-4px)}
+.book-stack{position:relative;width:210px;height:290px;margin:0 auto}
+.book-stack img{position:absolute;top:0;left:0;width:210px;border-radius:6px;box-shadow:0 20px 46px rgba(27,42,74,0.24),0 4px 12px rgba(27,42,74,0.12);transition:transform 0.3s}
+.book-stack img:nth-child(1){transform:rotate(-13deg) translate(-14px,6px);z-index:1}
+.book-stack img:nth-child(2){transform:rotate(9deg) translate(12px,10px);z-index:2}
+.book-stack img:nth-child(3){transform:rotate(-2deg) translateY(-6px);z-index:3;box-shadow:0 30px 60px rgba(27,42,74,0.28),0 6px 16px rgba(27,42,74,0.15)}
+.book-stack:hover img:nth-child(3){transform:rotate(0deg) translateY(-10px)}
 
 /* STATS */
 .stats-row{display:flex;gap:56px;justify-content:center;flex-wrap:wrap;padding:56px 24px;background:var(--sand);border-top:1px solid rgba(27,42,74,0.08);border-bottom:1px solid rgba(27,42,74,0.08)}
@@ -221,7 +224,11 @@ footer a:hover{color:var(--blue-mid)}
     <a href="#inside" class="btn-ghost">Xem bên trong</a>
   </div>
   <div class="book-wrap">
-    <div class="book-real"><img src="assets/cover-1.jpg" alt="Daily Speaking Workbook"></div>
+    <div class="book-stack">
+      <img src="assets/cover-3.jpg" alt="Daily Speaking Workbook 3">
+      <img src="assets/cover-2.jpg" alt="Daily Speaking Workbook 2">
+      <img src="assets/cover-1.jpg" alt="Daily Speaking Workbook 1">
+    </div>
   </div>
 </section>
 
