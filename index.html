@@ -155,10 +155,23 @@ footer{background:var(--navy2);border-top:1px solid rgba(255,255,255,.07);color:
   .about-copy-final{padding-top:0}
 }
 
+
+/* HERO CTA REDESIGN */
+.hero-action{display:flex;flex-direction:column;align-items:flex-start;gap:18px;margin-top:8px}
+.hero-buy{padding:16px 34px;font-size:15px;font-weight:700;transition:.2s}
+.hero-buy:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(27,42,74,.25)}
+.hero-benefits{display:flex;flex-wrap:wrap;gap:12px 18px;font-size:13px;color:var(--muted)}
+.hero-benefits span{white-space:nowrap}
+@media(max-width:640px){
+.hero-action{align-items:stretch}
+.hero-buy{text-align:center}
+.hero-benefits{flex-direction:column;gap:8px}
+}
+
 </style>
 </head>
 <body>
-<nav><a class="brand" href="#">aurora.logs</a><a class="navcta" href="#pricing">Xem workbook</a></nav>
+<nav><a class="brand" href="#">aurora.logs</a><a class="navcta" href="#pricing">Mua ngay →</a></nav>
 
 <header class="hero">
   <div class="hero-copy"><div class="reveal">
@@ -167,7 +180,15 @@ footer{background:var(--navy2);border-top:1px solid rgba(255,255,255,.07);color:
     <p class="hero-lead">Không phải “bồi thêm” từ vựng hay ngữ pháp.</p>
     <p class="hero-desc">Khi AI có thể dịch gần như mọi thứ chỉ trong vài giây, “biết” tiếng Anh thôi là chưa đủ. Chỉ những người có phản xạ dùng tiếng Anh một cách tự nhiên mới có thể thực sự sống và làm việc bằng ngôn ngữ này.</p>
     <p class="hero-desc"><strong>Daily Speaking Workbook</strong> là bộ bài tập thực hành qua mẫu câu — để bạn biến những gì đã học thành phản xạ nói, 15–20 phút mỗi ngày.</p>
-    <div class="hero-btns"><a class="btn btn-main" href="#pricing">Bắt đầu luyện nói →</a><a class="btn btn-ghost" href="#inside">Xem bên trong</a></div>
+    
+<div class="hero-action">
+  <a class="btn btn-main hero-buy" href="#pricing">Tải workbook ngay →</a>
+  <div class="hero-benefits">
+    <span>✓ PDF tải về ngay</span>
+    <span>✓ Audio đi kèm</span>
+    <span>✓ Cập nhật miễn phí</span>
+  </div>
+</div>
   </div></div>
   <div class="hero-visual"><img src="assets/dsw-3-workbooks-spiral.png" alt="Bộ 3 Daily Speaking Workbook dạng vở gáy xoắn"></div>
 </header>
@@ -269,7 +290,7 @@ footer{background:var(--navy2);border-top:1px solid rgba(255,255,255,.07);color:
 </section>
 
 <section class="final">
-  <div class="narrow"><span class="label" style="color:#F0B88D">Đừng đợi tự tin rồi mới nói</span><h2>Hãy nói để trở nên <em>tự tin.</em></h2><p>Bạn không cần bắt đầu bằng một cuộc hội thoại dài. Chỉ cần một unit, 15 phút và vài câu được nói thành tiếng hôm nay.</p><a class="btn btn-main" style="background:#fff;color:var(--navy)" href="#pricing">Chọn workbook phù hợp →</a></div>
+  <div class="narrow"><span class="label" style="color:#F0B88D">SẴN SÀNG CHƯA?</span><h2>Thôi đừng lười <em>nữa.</em></h2><p>Bạn đã có đủ từ vựng rồi.<br>Luyện nói ngay thôi.</p><a class="btn btn-main" style="background:#fff;color:var(--navy)" href="#pricing">Tải workbook ngay →</a></div>
 </section>
 <footer>© 2026 aurora.logs · Daily Speaking Workbook</footer>
 <script>
